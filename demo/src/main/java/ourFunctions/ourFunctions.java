@@ -6,6 +6,8 @@ import java.util.TreeMap;
 
 public class ourFunctions {
        
+	
+	//zestaw funkcji tworzacych losowe wartosci 
 	public static String createString() {
 		  
 	    int leftLimit = 97; 
