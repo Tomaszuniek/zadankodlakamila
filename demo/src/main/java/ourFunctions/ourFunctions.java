@@ -13,7 +13,7 @@ public class ourFunctions {
 	    int leftLimit = 97; 
 	    int rightLimit = 122; 
 	    Random random = new Random();
-	    int targetStringLength = random.nextInt(10);
+	    int targetStringLength = random.nextInt(10)+1;
 	    
 	    StringBuilder buffer = new StringBuilder(targetStringLength);
 	    for (int i = 0; i < targetStringLength; i++) {
