@@ -1,4 +1,5 @@
 package com.example.demo.controller;
+
 import java.lang.reflect.Field; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +38,7 @@ public class Controller {
 			//nizej tworzymy nowa instancje klasy lokalizacja i wrzucamy do listy ktora zostanie zwrocona jako json
 			lista.add(new Location(ourFunctions.createString(),ourFunctions.createInt(1000000),ourFunctions.createString(),name,name + ", " + country,ourFunctions.createString(),ourFunctions.createString(),country,ourFunctions.createMap(),ourFunctions.createInt(100000),ourFunctions.createBool(),ourFunctions.createString(),ourFunctions.createBool(),ourFunctions.createInt(1000000)));
 		};
+
 		return (lista);
 	}
 	
@@ -60,10 +62,16 @@ public class Controller {
 
 	 @GetMapping(value = "/endpoint2/{polecenia}") //adres ze zmienna
 	   	public String getText2(
-	   			@PathVariable("polecenia") String polecenia) {
-		 
+	   			@PathVariable("polecenia") String polecenia) throws Exception{
+
+		polecenia = polecenia.replaceAll("\\s","");
+
 		 String[] polecenia2 = polecenia.split(","); //z racji ze polecenia mialy byc w formacie
 		 											// id, name, country mozemy podzielic argument w linku na liste stringow wg przecinkow
+
+		 for(String a : polecenia2){
+			 System.out.println(a);
+		 }
 		 String csv2 = "";
 		 
 		 
