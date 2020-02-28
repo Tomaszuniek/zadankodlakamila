@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.controller.Controller;
+import com.example.demo.controller.JSONController;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,77 +27,58 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = Controller.class)
+@WebMvcTest(controllers = JSONController.class)
 class ZadankoApplicationTests {
 
 	@Autowired
 	private MockMvc mockMvc;
 
 	@Test
-	public void jsonTest() throws Exception{
+	public void generateJSONTest() throws Exception{
 		Integer size = 10;
 		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", size)).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(size))).andReturn();
-
-
 	}
 
 	@Test
-	public void endpoint1Test()  throws Exception{
+	public void CsvFixedFieldsEqualityTest()  throws Exception{
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", 10)).andDo(print());
-		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/endpoint1")).andDo(print()).andExpect(status().isOk()).andReturn();
+
+		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/CsvFixedFields")).andDo(print()).andExpect(status().isOk()).andReturn();
 		String actualResponseBody = mvcResult.getResponse().getContentAsString();
 		List<String> result = Arrays.asList(actualResponseBody.split("\\s*,\\s*"));
+
 		assertThat(result.get(0)).isEqualTo("type");
 		assertThat(result.get(1)).isEqualTo("_id");
 		assertThat(result.get(2)).isEqualTo("name");
 		assertThat(result.get(3)).isEqualTo("latitude");
 		assertThat(result.get(4)).isEqualTo("longitude");
 		System.out.println(result);
-
 	}
 
-
 	@Test
-	public void endpoint2Test() throws Exception{
+	public void RequestedFieldsEqualityTest() throws Exception{
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", 10)).andDo(print());
-		String polecenia = "fullName,name,longitude,     latitude";
-		polecenia = polecenia.replaceAll("\\s","");
-		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/endpoint2/{polecenia}", polecenia)).andDo(print()).andExpect(status().isOk()).andReturn();
-
+		String requestedFields = "fullName,name,longitude,     latitude";
+		requestedFields = requestedFields.replaceAll("\\s","");
+		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/csvWithRequestedFields/{polecenia}", requestedFields)).andDo(print()).andExpect(status().isOk()).andReturn();
 		String actualResponseBody2 = mvcResult.getResponse().getContentAsString();
-
 		List<String> result2= Arrays.asList(actualResponseBody2.split(","));
-
-		List<String> resultPolecenie = Arrays.asList(polecenia.split(","));
-
-		for(String a : result2){
-			System.out.println(a);
-		}
-
-		/*for(String a : resultPolecenie){
-			System.out.println(a);
-		}*/
+		List<String> resultPolecenie = Arrays.asList(requestedFields.split(","));
 
 		for(int i = 0; i < resultPolecenie.size(); i++){
 			assertThat(result2.get(i)).isEqualTo(resultPolecenie.get(i));
 		}
-
-
-
 	}
 
 	@Test
-	public void endpoint2Test2() throws  Exception{
+	public void csvWithRequestedFieldsExceptionYieldingTest() throws  Exception{
 		NestedServletException illegalArgumentException = Assertions.assertThrows(NestedServletException.class, () -> {
 			this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", 10)).andDo(print());
-			String polecenia = "id_, type, longitude, latitude, name, fullName, chuj";
-			polecenia = polecenia.replaceAll("\\s", "");
-			MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/endpoint2/{polecenia}", polecenia)).andDo(print()).andExpect(status().isOk()).andReturn();
-
+			String requestedFields = "id_, type, longitude, latitude, name, fullName, ch        u        j";
+			requestedFields = requestedFields.replaceAll("\\s", "");
+			MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/csvWithRequestedFields/{requestedFields}", requestedFields)).andDo(print()).andExpect(status().isOk()).andReturn();
 		});
 
-
 		assertThat(illegalArgumentException.getCause().getClass()).isEqualTo(IllegalArgumentException.class);
-
 	}
 }
