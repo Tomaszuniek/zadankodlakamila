@@ -2,5 +2,9 @@ language: java
 dist: trusty 
 jdk:
   - oraclejdk8
+ 
+deploy:
+  provider: script
+  script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
 after_success:
   - python <(curl -s https://raw.githubusercontent.com/TouK/sputnik-ci/master/sputnik-ci.py)
