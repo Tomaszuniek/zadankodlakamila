@@ -38,6 +38,47 @@ public class Location {
 		this.distance = distance;
 	}
 
+
+
+	public String get(String requestedField) {
+		switch (requestedField) {
+			case "_type":
+				return get_type() + ",";
+			case "_id":
+				return get_id() + ",";
+			case "key":
+				return getKey() + ",";
+			case "name":
+				return getName() + ",";
+			case "fullName":
+				return getFullName() + ",";
+			case "iata_airport_code":
+				return getIata_airport_code() + ",";
+			case "type":
+				return getType() + ",";
+			case "country":
+				return getCountry() + ",";
+			case "geo_position":
+				return getGeo_position() + ",";
+			case "location_id":
+				return getLocation_id() + ",";
+			case "inEurope":
+				return isInEurope() + ",";
+			case "countryCode":
+				return getCountryCode() + ",";
+			case "coreCountry":
+				return isCoreCountry() + ",";
+			case "distance":
+				return getDistance() + ",";
+			case "latitude":
+				return getLatitude() + ",";
+			case "longitude":
+				return getLongitude() + ",";
+			default:
+				throw new IllegalArgumentException("field does not exist");
+		}
+	}
+
 	public String get_type() {
 		return _type;
 	}

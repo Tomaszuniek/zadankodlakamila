@@ -1,4 +1,4 @@
-package com.example.demo.randomvaluesfunctions;
+package Functions;
 
 import com.example.demo.location.Location;
 import java.util.List;
@@ -18,14 +18,12 @@ public class RandomValuesFunctions {
 	    int rightLimit = 122; 
 	    Random random = new Random();
 	    int targetStringLength = random.nextInt(10)+1;
-	    StringBuilder buffer = new StringBuilder(targetStringLength);
+	    StringBuilder builder = new StringBuilder(targetStringLength);
 	    for (int i = 0; i < targetStringLength; i++) {
-	        int randomLimitedInt = leftLimit + (int) 
-	          (random.nextFloat() * (rightLimit - leftLimit + 1));
-	        buffer.append((char) randomLimitedInt);
+	        int randomLimitedInt = random.nextInt(rightLimit-leftLimit) + leftLimit;
+	        builder.append((char) randomLimitedInt);
 	    }
-	    String generatedString = buffer.toString();
-	    return(generatedString);
+	    return(builder.toString());
 	}
 	
 	public static int generateInt(int limit) {
