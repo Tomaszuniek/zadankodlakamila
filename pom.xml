@@ -95,7 +95,7 @@
       </executions>
     </plugin>
 		</plugins>
-		<finalName>spring-docker-zadanko</finalName>
+		
 	</build>
 
 </project>
