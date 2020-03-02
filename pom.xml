@@ -85,7 +85,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-maven-plugin</artifactId>
       <version>2.2.5.RELEASE</version>
-				<configuration> <mainClass>${start-class}</mainClass></configuration>
+				<configuration> <mainClass>${ZadankoApplication}</mainClass></configuration>
       <executions>
         <execution>
           <goals>
