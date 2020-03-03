@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.location.Location;
- 
+  
 
 import java.util.ArrayList;
 import java.util.List;
