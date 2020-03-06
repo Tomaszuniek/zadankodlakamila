@@ -34,16 +34,18 @@ class ZadankoApplicationTests {
 	private MockMvc mockMvc;
 
 	@Test
-	public void generateJSONTest() throws Exception{
+	public void generateJSONTest() throws Exception {
 		Integer size = 10;
-		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", size)).andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(size))).andReturn();
+		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", size)).
+				andDo(print()).andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(size))).andReturn();
 	}
 
 	@Test
-	public void CsvFixedFieldsEqualityTest()  throws Exception{
+	public void CsvFixedFieldsEqualityTest() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", 10)).andDo(print());
 
-		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/CsvFixedFields")).andDo(print()).andExpect(status().isOk()).andReturn();
+		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/CsvFixedFields")).
+				andDo(print()).andExpect(status().isOk()).andReturn();
 		String actualResponseBody = mvcResult.getResponse().getContentAsString();
 		List<String> result = Arrays.asList(actualResponseBody.split("\\s*,\\s*"));
 
@@ -56,27 +58,29 @@ class ZadankoApplicationTests {
 	}
 
 	@Test
-	public void RequestedFieldsEqualityTest() throws Exception{
+	public void RequestedFieldsEqualityTest() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", 10)).andDo(print());
 		String requestedFields = "fullName,name,longitude,     latitude";
 		requestedFields = requestedFields.replaceAll("\\s","");
-		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/csvWithRequestedFields/{polecenia}", requestedFields)).andDo(print()).andExpect(status().isOk()).andReturn();
+		MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/csvWithRequestedFields/{polecenia}", requestedFields)).
+				andDo(print()).andExpect(status().isOk()).andReturn();
 		String actualResponseBody2 = mvcResult.getResponse().getContentAsString();
 		List<String> result2= Arrays.asList(actualResponseBody2.split(","));
 		List<String> resultPolecenie = Arrays.asList(requestedFields.split(","));
 
-		for(int i = 0; i < resultPolecenie.size(); i++){
+		for(int i = 0; i < resultPolecenie.size(); i++) {
 			assertThat(result2.get(i)).isEqualTo(resultPolecenie.get(i));
 		}
 	}
 
 	@Test
-	public void csvWithRequestedFieldsExceptionYieldingTest() throws  Exception{
+	public void csvWithRequestedFieldsExceptionYieldingTest() {
 		NestedServletException illegalArgumentException = Assertions.assertThrows(NestedServletException.class, () -> {
 			this.mockMvc.perform(MockMvcRequestBuilders.get("/generate/json/{size}", 10)).andDo(print());
 			String requestedFields = "id_, type, longitude, latitude, name, fullName, ch        u        j";
 			requestedFields = requestedFields.replaceAll("\\s", "");
-			MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/csvWithRequestedFields/{requestedFields}", requestedFields)).andDo(print()).andExpect(status().isOk()).andReturn();
+			MvcResult mvcResult = this.mockMvc.perform(MockMvcRequestBuilders.get("/csvWithRequestedFields/{requestedFields}", requestedFields)).
+					andDo(print()).andExpect(status().isOk()).andReturn();
 		});
 
 		assertThat(illegalArgumentException.getCause().getClass()).isEqualTo(IllegalArgumentException.class);

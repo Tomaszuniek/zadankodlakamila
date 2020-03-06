@@ -34,6 +34,6 @@ public class JSONController {
 	 @GetMapping(value = "/csvWithRequestedFields/{requestedFields}")
 	   	public String returnCsv(
 	   			@PathVariable("requestedFields") String requestedFields) throws Exception{
-		 return returnRequestedFieldValues(locations, generateSeparatedStrings(requestedFields));
+		 return generateCsvRequestedFieldValues(locations, generateSeparatedStrings(requestedFields));
 	 }
 }

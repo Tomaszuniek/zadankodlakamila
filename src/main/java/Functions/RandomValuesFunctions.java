@@ -37,9 +37,9 @@ public class RandomValuesFunctions {
 	}
 	
 	public static Map<String,Integer> generateMap() {
-		Map<String, Integer> latlon= new TreeMap<>();
-		latlon.put("latitude",generateInt(360));
-		latlon.put("longitude",generateInt(360));
-		return (latlon);
+		Map<String, Integer> latitudeAndLongitude= new TreeMap<>();
+		latitudeAndLongitude.put("latitude",generateInt(360));
+		latitudeAndLongitude.put("longitude",generateInt(360));
+		return (latitudeAndLongitude);
 	}
 }

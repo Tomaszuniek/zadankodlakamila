@@ -3,6 +3,7 @@ package com.example.demo.location;
 import java.util.Map;
 
 public class Location {
+	public static final String COMMA = ",";
 	private String name;
 	private String _type;
 	private int _id;
@@ -43,37 +44,37 @@ public class Location {
 	public String get(String requestedField) {
 		switch (requestedField) {
 			case "_type":
-				return get_type() + ",";
+				return get_type() + COMMA;
 			case "_id":
-				return get_id() + ",";
+				return get_id() + COMMA;
 			case "key":
-				return getKey() + ",";
+				return getKey() + COMMA;
 			case "name":
-				return getName() + ",";
+				return getName() + COMMA;
 			case "fullName":
-				return getFullName() + ",";
+				return getFullName() + COMMA;
 			case "iata_airport_code":
-				return getIata_airport_code() + ",";
+				return getIata_airport_code() + COMMA;
 			case "type":
-				return getType() + ",";
+				return getType() + COMMA;
 			case "country":
-				return getCountry() + ",";
+				return getCountry() + COMMA;
 			case "geo_position":
-				return getGeo_position() + ",";
+				return getGeo_position() + COMMA;
 			case "location_id":
-				return getLocation_id() + ",";
+				return getLocation_id() + COMMA;
 			case "inEurope":
-				return isInEurope() + ",";
+				return isInEurope() + COMMA;
 			case "countryCode":
-				return getCountryCode() + ",";
+				return getCountryCode() + COMMA;
 			case "coreCountry":
-				return isCoreCountry() + ",";
+				return isCoreCountry() + COMMA;
 			case "distance":
-				return getDistance() + ",";
+				return getDistance() + COMMA;
 			case "latitude":
-				return getLatitude() + ",";
+				return getLatitude() + COMMA;
 			case "longitude":
-				return getLongitude() + ",";
+				return getLongitude() + COMMA;
 			default:
 				throw new IllegalArgumentException("field does not exist");
 		}
