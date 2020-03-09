@@ -16,13 +16,13 @@ public class GenerateCSVFunctions {
             locations.add(generateLocation());
         }
         return locations;
-    }
+    } 
 
     public static String[] generateSeparatedStrings(String unseparatedFields) {
         return unseparatedFields.replaceAll("\\s","").split(",");
     }
 
-    public static String generateCsvRequestedFieldValues(List<Location> locations, String[] separatedRequestedFields) throws IllegalArgumentException {
+    public static String generateCsvRequestedFieldValues(List<Location> locations, String[] separatedRequestedFields) {
         StringBuilder builder = new StringBuilder();
         for (String requestedField : separatedRequestedFields) {
             builder.append(requestedField + ",");
