@@ -25,7 +25,7 @@ public class RandomValuesFunctions {
 	    }
 	    return(builder.toString());
 	}
-	
+	 
 	public static int generateInt(int limit) {
 		Random random = new Random();
 		return (random.nextInt(limit));
