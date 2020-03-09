@@ -1,0 +1,6 @@
+com/example/demo/controller/JSONController.class
+com/example/demo/ZadankoApplication.class
+com/example/demo/functions/GenerateCSVFunctions.class
+com/example/demo/functions/RandomValuesFunctions.class
+com/example/demo/location/Location.class
+com/example/demo/controller/WebConfig.class

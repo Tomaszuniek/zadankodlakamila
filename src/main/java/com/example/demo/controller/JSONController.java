@@ -12,7 +12,7 @@ import com.example.demo.location.Location;
 import java.util.ArrayList;
 import java.util.List;
 
-import static functions.GenerateCSVFunctions.*;
+import static com.example.demo.functions.GenerateCSVFunctions.*;
 
 
 @RestController
