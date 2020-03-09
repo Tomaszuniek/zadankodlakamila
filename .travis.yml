@@ -4,21 +4,21 @@ language:
 jdk:
   - openjdk8
 
-
-install: 
- - true
- 
- 
-script:
-  - mvn install
-  - mvn clean verify sonar:sonar -Pcoverage 
- 
- cache:
-  directories:
-    - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
- 
 addons:
   sonarcloud:
     organization: "tomaszuniek"
     token: dc71aec0900771bd51a26c0c50634ab69bfda8e9
+
+install: 
+ - true
+
+script:
+- mvn install
+- mvn clean package sonar:sonar -Pcoverage -Dsonar.projectKey=Tomaszuniek_zadankodlakamila
+- sonar-scanner
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+
