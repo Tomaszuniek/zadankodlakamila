@@ -8,7 +8,7 @@ import static com.example.demo.functions.RandomValuesFunctions.generateLocation;
 
 public class GenerateCSVFunctions {
 
-    private GenerateCSVFunctions(){};//?
+    private GenerateCSVFunctions(){}//?
 
     public static List<Location> generateJSON(List<Location> locations, int size) {
         locations.clear();
@@ -22,18 +22,16 @@ public class GenerateCSVFunctions {
         return unseparatedFields.replaceAll("\\s","").split(",");
     }
 
-    public static String generateCsvRequestedFieldValues(List<Location> locations, String[] separatedRequestedFields) {
+    public static String generateCsvRequestedFieldValues(List<Location> locations, String[] separatedRequestedFields) throws IllegalArgumentException {
         StringBuilder builder = new StringBuilder();
         for (String requestedField : separatedRequestedFields) {
             builder.append(requestedField + ",");
         }
         for (Location location : locations) {
             for(String requestedField : separatedRequestedFields) {
-                try {
+
                     builder.append(location.get(requestedField));
-                }catch(Exception e) {
-                    throw e;
-                }
+
             }
              builder.append("\n");
         }

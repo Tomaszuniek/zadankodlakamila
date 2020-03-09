@@ -8,6 +8,9 @@ import java.util.Random;
 import java.util.TreeMap;
 
 public class RandomValuesFunctions {
+
+	private RandomValuesFunctions() {}
+	private static Random random = new Random();
 	public static Location generateLocation() {
 		String country = generateString();
 		String name = generateString();
@@ -17,7 +20,7 @@ public class RandomValuesFunctions {
 	public static String generateString() {
 		int leftLimit = 97;
 	    int rightLimit = 122; 
-	    Random random = new Random();
+
 	    int targetStringLength = random.nextInt(10)+1;
 	    StringBuilder builder = new StringBuilder(targetStringLength);
 	    for (int i = 0; i < targetStringLength; i++) {
