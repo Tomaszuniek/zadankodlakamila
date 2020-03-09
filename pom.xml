@@ -16,6 +16,14 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+
+			<sonar.projectKey>Tomaszuniek_zadankodlakamila</sonar.projectKey>
+			<sonar.organization>tomaszuniek</sonar.organization>
+			<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+			<sonar.login>2a4c13b6e483efa655605f3af3cadf2dbcb14b10</sonar.login>
+
+
+
 	</properties>
 
 	<dependencies>
