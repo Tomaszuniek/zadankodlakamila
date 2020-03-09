@@ -8,7 +8,7 @@ import static com.example.demo.functions.RandomValuesFunctions.generateLocation;
 
 public class GenerateCSVFunctions {
 
-    private GenerateCSVFunctions(){};//?
+    private GenerateCSVFunctions(){}//?
 
     public static List<Location> generateJSON(List<Location> locations, int size) {
         locations.clear();
@@ -16,7 +16,7 @@ public class GenerateCSVFunctions {
             locations.add(generateLocation());
         }
         return locations;
-    }
+    } 
 
     public static String[] generateSeparatedStrings(String unseparatedFields) {
         return unseparatedFields.replaceAll("\\s","").split(",");
@@ -29,11 +29,9 @@ public class GenerateCSVFunctions {
         }
         for (Location location : locations) {
             for(String requestedField : separatedRequestedFields) {
-                try {
+
                     builder.append(location.get(requestedField));
-                }catch(Exception e) {
-                    throw e;
-                }
+
             }
              builder.append("\n");
         }

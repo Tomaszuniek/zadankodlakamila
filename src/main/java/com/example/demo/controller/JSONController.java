@@ -17,7 +17,7 @@ import static com.example.demo.functions.GenerateCSVFunctions.*;
 
 @RestController
 public class JSONController {
-	List<Location> locations = new ArrayList<Location>();
+	List<Location> locations = new ArrayList<>();
 
 	@RequestMapping(value = "/generate/json/{size}")
 	@ResponseBody
@@ -33,7 +33,7 @@ public class JSONController {
 
 	 @GetMapping(value = "/csvWithRequestedFields/{requestedFields}")
 	   	public String returnCsv(
-	   			@PathVariable("requestedFields") String requestedFields) throws Exception{
+	   			@PathVariable("requestedFields") String requestedFields) {
 		 return generateCsvRequestedFieldValues(locations, generateSeparatedStrings(requestedFields));
 	 }
 }
