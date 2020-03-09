@@ -1,17 +1,20 @@
-package Functions;
+package com.example.demo.functions;
 
 import com.example.demo.location.Location;
 import java.util.List;
 
-import static Functions.RandomValuesFunctions.generateLocation;
+import static com.example.demo.functions.RandomValuesFunctions.generateLocation;
 
 
 public class GenerateCSVFunctions {
+
+    private GenerateCSVFunctions(){};//?
+
     public static List<Location> generateJSON(List<Location> locations, int size) {
         locations.clear();
         for(int i=0; i<size; i++) {
             locations.add(generateLocation());
-        };
+        }
         return locations;
     }
 
@@ -20,31 +23,31 @@ public class GenerateCSVFunctions {
     }
 
     public static String generateCsvRequestedFieldValues(List<Location> locations, String[] separatedRequestedFields) {
-        String csv = "";
+        StringBuilder builder = new StringBuilder();
         for (String requestedField : separatedRequestedFields) {
-            csv += requestedField + ",";
+            builder.append(requestedField + ",");
         }
         for (Location location : locations) {
             for(String requestedField : separatedRequestedFields) {
                 try {
-                    csv += location.get(requestedField);
+                    builder.append(location.get(requestedField));
                 }catch(Exception e) {
-                    System.out.println(e);
                     throw e;
                 }
             }
-            csv += "\n";
+             builder.append("\n");
         }
-        return csv;
+        return builder.toString();
     }
 
 
 
     public static String generateCsvFixedFields(List<Location> locations) {
-        String csv = "type" + "," + "_id" + "," + "name" + "," + "latitude" + "," + "longitude" + "," + "\n";
+        StringBuilder builder = new StringBuilder();
+        builder.append("type" + "," + "_id" + "," + "name" + "," + "latitude" + "," + "longitude" + "," + "\n");
         for (Location location : locations) {
-            csv += location.get_type() + "," + location.getLocation_id() + "," + location.getName() + "," + location.getLongitude() + "," + location.getLatitude() + "\n";
+            builder.append(location.get_type() + "," + location.getLocation_id() + "," + location.getName() + "," + location.getLongitude() + "," + location.getLatitude() + "\n");
         }
-        return csv;
+        return builder.toString();
     }
 }
